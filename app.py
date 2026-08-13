@@ -233,30 +233,46 @@ LANDING_HTML = """
 <div class="wrap">
   <div class="card">
     <span class="tag">Research study</span>
-    <h1>Would this AI analysis answer the question correctly?</h1>
-    <p>An AI data analyst was asked questions about small data tables. Before the
-    analysis is run, <strong>you review it</strong>. On each of your
-    <strong>{{ n_trials }} trials</strong> you will see:</p>
+    <h1>Check the AI analyst's work — before it runs</h1>
+    <p><strong>What's happening:</strong> an AI analyst was given a question about a small
+    data table. Its job is to write a piece of <em>SQL code</em> (a database query) that,
+    when run, retrieves the correct answer to that question. <strong>Your job:</strong>
+    review the AI's work and judge whether it will produce the correct answer —
+    <em>before</em> the code is executed. You will not see the result; you are checking
+    the approach.</p>
+    <h2>On each of your {{ n_trials }} trials you will see:</h2>
     <ol>
-      <li>A question about a data table,</li>
-      <li>the full table (usually about 10 rows), and</li>
-      <li>the analyst's submission — sometimes the raw computer code it will run,
-          sometimes a plain-language description of its approach.</li>
+      <li>The question the AI was asked,</li>
+      <li>the full data table (usually about 10 rows), and</li>
+      <li>the AI's work, shown in <strong>one</strong> of three forms — which one varies
+          from trial to trial:
+        <ul>
+          <li><strong>The code itself</strong> — the actual SQL query the AI wrote;</li>
+          <li><strong>A summary of its approach</strong> — the AI's own reasoning about
+              how it tackled the question, in plain language;</li>
+          <li><strong>An explanation of the analysis</strong> — what the goal is, how the
+              analysis defines and computes each part, and what the output will look like.</li>
+        </ul>
+      </li>
     </ol>
-    <p><strong>Your job:</strong> decide whether the analyst's approach will produce
-    the correct answer to the question <em>as asked</em>. Some submissions contain a
-    subtle mistake — a wrong column, a wrong value, the wrong kind of calculation.
-    Others are perfectly fine. You will NOT be shown the analysis result — judge the
-    approach, not the answer.</p>
+    <p>Some of the AI's work contains a subtle mistake — a wrong column, a wrong value,
+    the wrong kind of calculation. Some is perfectly correct. For each trial you answer:
+    will this produce the correct answer to the question <em>as asked</em>? Then rate your
+    confidence, and if you marked it wrong, briefly say why.</p>
+    <p><strong>Important — do not guess.</strong> If you are shown computer code you
+    cannot read, or you genuinely cannot tell whether the work is right, choose
+    <em>"I can't tell"</em>. An honest "I can't tell" is a valid and useful answer in this
+    study; guessing harms the research. Your payment does not depend on which answers you
+    give.</p>
     <div class="exbox"><strong>Worked example.</strong> Question: <em>"in how many games
     did the winning team score more than 4 points?"</em> next to a table of soccer
-    matches. If the submission says it <em>"adds both teams' goals together and keeps
-    matches where the combined total exceeds 4"</em> — that is a mistake you can catch:
-    a 1&ndash;4 match would be counted even though the winner scored only 4. You would
-    mark it <em>wrong</em> and briefly say why.</p></div>
-    <p class="muted">If a submission is computer code you cannot read, that's a valid
-    situation — answer honestly, including "I can't tell". No programming knowledge is
-    needed or expected. Please don't use external tools. About 8&ndash;12 minutes.</p>
+    matches. If the AI's approach <em>"adds both teams' goals together and keeps matches
+    where the combined total exceeds 4"</em> — that is a mistake you can catch by looking
+    at the table: a 1&ndash;4 match would be counted even though the winner scored only 4.
+    You would mark it <em>wrong</em> and briefly say why.</div>
+    <p class="muted">No programming knowledge is needed or expected. Please don't use
+    external tools — just the table on screen and your own judgment. About
+    8&ndash;12 minutes.</p>
     <form method="post" action="{{ url_for('start') }}">
       <label for="pid">Prolific ID</label>
       <input type="text" id="pid" name="pid" value="{{ pid or '' }}" required
